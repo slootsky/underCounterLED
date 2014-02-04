@@ -2,6 +2,7 @@
 import Adafruit_BBIO.PWM as PWM
 import Adafruit_BBIO.ADC as ADC
 
+import math
 import time
 import datetime
 import ephem
@@ -49,8 +50,14 @@ while True:
 		light_reading = ADC.read(light_sensor)
 
 		# exaggerate the light reading (0-1)
-		light_reading = light_reading * light_reading * light_reading
+		light_reading = math.log10(light_reading*100) - 1
+#		light_reading = light_reading * light_reading * light_reading
 #		light_reading = light_reading * light_reading 
+
+		if ( light_reading > 1) :
+			light_reading = 1
+		if ( light_reading < 0 ) :
+			light_reading = 0
 
 		if ( last_light_reading == -1 ) :
 			last_light_reading = light_reading *2
@@ -79,4 +86,3 @@ while True:
 		# sleep for about 50ms
 		time.sleep(50.0/1000.0)
 		now=datetime.datetime.now()
-
