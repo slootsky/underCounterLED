@@ -62,7 +62,7 @@ while True:
 		if ( last_light_reading == -1 ) :
 			last_light_reading = light_reading *2
 
-		light_change = abs( ( last_light_reading - light_reading ) / light_reading)
+#		light_change = abs( ( last_light_reading - light_reading ) / light_reading)
 		if (next_sunrise < next_sunset):
 #                       print "currently night"
 #                       next_event=next_sunrise
@@ -86,3 +86,4 @@ while True:
 		# sleep for about 50ms
 		time.sleep(50.0/1000.0)
 		now=datetime.datetime.now()
+
